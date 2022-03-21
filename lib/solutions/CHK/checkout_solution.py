@@ -19,6 +19,7 @@ def compute_price_with_special_offer(*, num_items, regular_price, special_offer_
 
 
 def checkout(skus):
+    print(skus)
     skus_list = [sku for sku in skus]
 
     # basic input validation
@@ -48,6 +49,7 @@ def checkout(skus):
         print(number_per_item[sku], regular_price)
         if sku in DISCOUNT_OFFERS_BY_ITEM:
             # our strategy is to apply every offer and return the highest discounted price thus finding the "best offer"
+            # however, offers can be combined to give better deals e.g. 8xA = 3XA + 5XA
             best_discounted_price = None
             for special_offer_quantity, special_offer_price in DISCOUNT_OFFERS_BY_ITEM[sku]:
                 discounted_price = compute_price_with_special_offer(
@@ -60,9 +62,12 @@ def checkout(skus):
                     best_discounted_price = discounted_price
 
             total += best_discounted_price
+            print(best_discounted_price)
         else:
             total += regular_price * number_per_item[sku]
+            print(regular_price * number_per_item[sku])
 
     return total
+
 
 
