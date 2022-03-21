@@ -46,18 +46,24 @@ def checkout(skus):
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
         if sku in DISCOUNT_OFFERS_BY_ITEM:
-            special_offer_quantity, special_offer_price = DISCOUNT_OFFERS_BY_ITEM[sku]
+            # our strategy is to apply every offer and return the highest discounted price thus finding the "best offer"
+            best_discounted_price = 0
+            for special_offer_quantity, special_offer_price in DISCOUNT_OFFERS_BY_ITEM[sku]:
+                discounted_price = compute_price_with_special_offer(
+                    num_items=number_per_item[sku],
+                    regular_price=regular_price,
+                    special_offer_quantity=special_offer_quantity,
+                    special_offer_price=special_offer_price,
+                )
+                if discounted_price > best_discounted_price:
+                    best_discounted_price = discounted_price
 
-            total += compute_price_with_special_offer(
-                num_items=number_per_item[sku],
-                regular_price=regular_price,
-                special_offer_quantity=special_offer_quantity,
-                special_offer_price=special_offer_price,
-            )
+            total += best_discounted_price
         else:
             total += regular_price * number_per_item[sku]
 
     return total
+
 
 
 
