@@ -22,7 +22,7 @@ class TestChk:
         assert checkout_solution.checkout("AA") == 100
         assert checkout_solution.checkout("ABCDABCD") == 215
         assert checkout_solution.checkout("BABDDCAC") == 215
-        assert checkout_solution.checkout("ABCDCBAABCABBAAA") == 505
+        assert checkout_solution.checkout("ABCDCBAABCABBAAA") == 495
 
         assert checkout_solution.checkout("E") == 40
         assert checkout_solution.checkout("ABCDE") == 50 + 30 + 20 + 15 + 40
@@ -31,3 +31,4 @@ class TestChk:
         assert checkout_solution.checkout("AAAAA") == 200
         assert checkout_solution.checkout("AAAAAA") == 250
         assert checkout_solution.checkout("AAAAAAA") == 300
+
