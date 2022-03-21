@@ -48,9 +48,3 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
-
-
-
-
-
-
