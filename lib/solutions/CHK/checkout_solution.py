@@ -17,7 +17,7 @@ def compute_price_with_special_offer(*, num_items, regular_price, special_offer_
 
 
 def checkout(skus):
-    skus_list = skus.split(",")
+    skus_list = [sku for sku in skus]
 
     # basic input validation
     if any([sku not in PRICE_BY_ITEM for sku in skus_list]):
@@ -48,4 +48,5 @@ def checkout(skus):
             total += regular_price
 
     return total
+
 
