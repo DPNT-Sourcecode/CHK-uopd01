@@ -37,8 +37,8 @@ def checkout(skus):
     for sku in number_per_item:
         if sku in GET_ONE_FREE_OFFERS_BY_ITEM:
             number_of_items, free_item = GET_ONE_FREE_OFFERS_BY_ITEM[sku]
-            number_of_free_items = number_of_items[sku] // number_of_items
-            number_of_items[free_item] -= number_of_free_items
+            number_of_free_items = number_per_item[sku] // number_of_items
+            number_per_item[free_item] -= number_of_free_items
 
     # compute total checkout value
     total = 0
@@ -57,5 +57,6 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
 

@@ -25,5 +25,6 @@ class TestChk:
         assert checkout_solution.checkout("ABCDCBAABCABBAAA") == 505
 
         assert checkout_solution.checkout("ABCDE") == 50 + 30 + 20 + 15 + 40
-        assert checkout_solution.checkout("ABCDE") == 50 + 30 * 0 + 20 + 15 + 2 * 40
+        assert checkout_solution.checkout("ABCDEE") == 50 + 30 * 0 + 20 + 15 + 2 * 40
+
 
