@@ -1,7 +1,7 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-PRICE_BY_ITEM = {"A": 50, "B": 30, "C": 20, "D": 15}
+PRICE_BY_ITEM = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
 # We'll map items to length 2 tuples such that the first element
 # is the number of items, second element is the total discounted price
 DISCOUNT_OFFERS_BY_ITEM = {"A": [3, 130], "B": [2, 45]}
@@ -33,6 +33,13 @@ def checkout(skus):
         else:
             number_per_item[sku] = 1
 
+    # apply get one free offers
+    for sku in number_per_item:
+        if sku in GET_ONE_FREE_OFFERS_BY_ITEM:
+            number_of_items, free_item = GET_ONE_FREE_OFFERS_BY_ITEM[sku]
+            number_of_free_items = number_of_items[sku] // number_of_items
+            number_of_items[free_item] -= number_of_free_items
+
     # compute total checkout value
     total = 0
     for sku in number_per_item:
@@ -50,4 +57,5 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
