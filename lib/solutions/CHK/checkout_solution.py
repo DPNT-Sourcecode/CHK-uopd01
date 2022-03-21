@@ -11,6 +11,7 @@ def compute_price_with_special_offer(*, num_items, regular_price, special_offer_
     price = 0
     num_special_offers = num_items // special_offer_quantity
     num_regular_items = num_items % special_offer_quantity
+    print(num_items, regular_price, num_special_offers, num_regular_items)
     price += num_special_offers * special_offer_price
     price += num_regular_items * regular_price
     return price
@@ -48,6 +49,3 @@ def checkout(skus):
             total += regular_price
 
     return total
-
-
-
