@@ -2,11 +2,11 @@
 # skus = unicode string
 
 PRICE_BY_ITEM = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
-# We'll map items to length 2 tuples such that the first element
+# We'll map items to lists of length 2 tuples such that the first element
 # is the number of items, second element is the total discounted price
-DISCOUNT_OFFERS_BY_ITEM = {"A": [3, 130], "B": [2, 45]}
+DISCOUNT_OFFERS_BY_ITEM = {"A": [(3, 130), (5, 200)], "B": [(2, 4)]}
 # for get one free offers, first element is number of items, second is the item you get for free
-GET_ONE_FREE_OFFERS_BY_ITEM = {"E": [2, "B"]}
+GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B")}
 
 
 def compute_price_with_special_offer(*, num_items, regular_price, special_offer_quantity, special_offer_price):
@@ -58,6 +58,7 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
 
 
