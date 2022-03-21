@@ -33,6 +33,7 @@ def checkout(skus):
 
     # compute total checkout value
     total = 0
+    print(skus)
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
         if sku in SPECIAL_OFFERS_BY_ITEM:
@@ -46,8 +47,10 @@ def checkout(skus):
             )
         else:
             total += regular_price
+        print(total)
 
     return total
+
 
 
 
