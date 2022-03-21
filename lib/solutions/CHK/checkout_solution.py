@@ -16,11 +16,18 @@ def compute_price_with_special_offer(*, num_items, regular_price, special_offer_
     return price
 
 
-def checkout(skus):
+def checkout(sku):
+    if sku not in PRICE_BY_ITEM:
+        return -1
+    else:
+        return PRICE_BY_ITEM[sku]
+
+    # hah, I too eagerly tried to implement a complete checkout on Round 1 :P
+
     skus_list = [sku for sku in skus]
 
     # basic input validation
-    if any([sku not in PRICE_BY_ITEM for sku in skus_list]):
+    if len(skus_list) == 0 or any([sku not in PRICE_BY_ITEM for sku in skus_list]):
         return -1
 
     # compute number of items per item
@@ -48,5 +55,6 @@ def checkout(skus):
             total += regular_price
 
     return total
+
 
 
