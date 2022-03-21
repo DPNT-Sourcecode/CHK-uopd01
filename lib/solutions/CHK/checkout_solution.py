@@ -1,9 +1,6 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-from lib.solutions.SUM.sum_solution import compute
-
-
 PRICE_BY_ITEM = {"A": 50, "B": 30, "C": 20, "D": 15}
 # We'll map items to length 2 tuples such that the first element
 # is the number of items, second element is the total discounted price
@@ -16,6 +13,7 @@ def compute_price_with_special_offer(*, num_items, regular_price, special_offer_
     num_regular_items = num_items % special_offer_quantity
     price += num_special_offers * special_offer_price
     price += num_regular_items * regular_price
+    return price
 
 
 def checkout(skus):
@@ -36,7 +34,7 @@ def checkout(skus):
     # compute total checkout value
     total = 0
     for sku in skus_list:
-        regular_price = SPECIAL_OFFERS_BY_ITEM[sku]
+        regular_price = PRICE_BY_ITEM[sku]
         if sku in SPECIAL_OFFERS_BY_ITEM:
             special_offer_quantity, special_offer_price = SPECIAL_OFFERS_BY_ITEM[sku]
 
@@ -50,5 +48,6 @@ def checkout(skus):
             total += regular_price
 
     return total
+
 
 
