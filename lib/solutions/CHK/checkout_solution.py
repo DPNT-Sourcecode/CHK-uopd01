@@ -33,9 +33,19 @@ PRICE_BY_ITEM = {
 # is the number of items, second element is the total discounted price
 # F is a special case where it "looks" like a "get one free" offer, but it's actually a
 # discount offer since it requires at least 3 F's in the basket and applies the price of 2
-DISCOUNT_OFFERS_BY_ITEM = {"A": [(3, 130), (5, 200)], "B": [(2, 45)], "F": [(3, 20)]}
+DISCOUNT_OFFERS_BY_ITEM = {
+    "A": [(3, 130), (5, 200)],
+    "B": [(2, 45)],
+    "F": [(3, 20)],
+    "K": [(2, 150)],
+    "P": [(5, 200)],
+    "Q": [(3, 80)],
+    "V": [(2, 90), (3, 130)],
+    "H": [(5, 45), (10, 80)],
+    "U": [(4, 120)],
+}
 # for get one free offers, first element is number of items, second is the item you get for free
-GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B")}
+GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B"), "N": (3, "M"), "R": (3, "Q")}
 
 
 def compute_price_with_special_offers(num_items, regular_price, *offers):
@@ -89,4 +99,5 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
