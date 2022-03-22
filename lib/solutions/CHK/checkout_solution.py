@@ -9,12 +9,21 @@ DISCOUNT_OFFERS_BY_ITEM = {"A": [(3, 130), (5, 200)], "B": [(2, 45)]}
 GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B")}
 
 
-def compute_price_with_special_offer(*, num_items, regular_price, special_offer_quantity, special_offer_price):
+def compute_price_with_special_offers(num_items, regular_price, *offers):
+    # validate pairs of (number_of_item, offer)
+    assert all([len(offer) == 2 for offer in offers])
+
+    # sort from best to worst offer
+    offers = sorted(offers, key=lambda x: x[0], reverse=True)
+
     price = 0
-    num_special_offers = num_items // special_offer_quantity
-    num_regular_items = num_items % special_offer_quantity
-    price += num_special_offers * special_offer_price
-    price += num_regular_items * regular_price
+    remaining_items = num_items
+    # apply offers from best to worst
+    for offer_quantity, offer_price in offers:
+        num_offers = remaining_items // offer_quantity
+        remaining_items = num_items % offer_quantity
+        price += num_offers * offer_price
+    price += remaining_items * regular_price
     return price
 
 
@@ -46,25 +55,15 @@ def checkout(skus):
     total = 0
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
+        print(sku)
         print(number_per_item[sku], regular_price)
         if sku in DISCOUNT_OFFERS_BY_ITEM:
-            # our strategy is to apply every offer and return the highest discounted price thus finding the "best offer"
-            # however, offers can be combined to give better deals e.g. 8xA = 3XA + 5XA
-            best_discounted_price = None
-            for special_offer_quantity, special_offer_price in DISCOUNT_OFFERS_BY_ITEM[sku]:
-                discounted_price = compute_price_with_special_offer(
-                    num_items=number_per_item[sku],
-                    regular_price=regular_price,
-                    special_offer_quantity=special_offer_quantity,
-                    special_offer_price=special_offer_price,
-                )
-                if best_discounted_price is None or discounted_price < best_discounted_price:
-                    best_discounted_price = discounted_price
-
-            total += best_discounted_price
-            print(best_discounted_price)
+            print(DISCOUNT_OFFERS_BY_ITEM[sku])
+            total += compute_price_with_special_offers(number_per_item[sku], regular_price, *DISCOUNT_OFFERS_BY_ITEM[sku])
         else:
-            total += regular_price * number_per_item[sku]
             print(regular_price * number_per_item[sku])
+            total += regular_price * number_per_item[sku]
+        print(total)
 
     return total
+
