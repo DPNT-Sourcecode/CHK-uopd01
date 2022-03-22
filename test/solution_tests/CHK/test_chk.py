@@ -48,7 +48,10 @@ class TestChk:
         assert checkout("STXSX") == 45 + 20 + 17
         assert checkout("STXYZ") == 45 + 20 + 17 # TYZ + S + X benefits the costumer
         assert checkout("XYZ") == 45
-        assert checkout("ZZY") == 21 + 21 + 20
-        assert checkout("ZZSTXY") == 17 + 21 + 20 + 45# X + Z + S + ZTY
+        #assert checkout("ZZY") == 21 + 21 + 20
+        assert checkout("ZZY") == 45
+        #assert checkout("ZZSTXY") == 17 + 21 + 20 + 45# X + Z + S + ZTY
+        assert checkout("ZZSTXY") == 90
+
 
 

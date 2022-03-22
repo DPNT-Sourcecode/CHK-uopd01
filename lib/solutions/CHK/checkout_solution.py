@@ -46,10 +46,12 @@ DISCOUNT_OFFERS_BY_ITEM = {
 }
 # for get one free offers, first element is number of items, second is the item you get for free
 GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B"), "N": (3, "M"), "R": (3, "Q")}
-# group offers
-GROUP_OFFERS = {
-    (("S", "T", "X", "Y", "Z"), 45)
-}
+# group offers, first element is the set of skus in the group, second element is the group number, third element is the price
+# I'm not sure if repeated items count for the group offer e.g. ZZX = 45 or ZZX = 2*21 + 20
+# I'll begin assuming they count because that favors the costumer
+GROUP_OFFERS = [
+    (("S", "T", "X", "Y", "Z"), 3, 45)
+]
 
 
 def compute_price_with_special_offers(num_items, regular_price, *offers):
@@ -95,6 +97,13 @@ def checkout(skus):
 
     # compute total checkout value
     total = 0
+
+    # apply group offers
+    for group, necessary_quantity, price in GROUP_OFFERS:
+        skus_in_group = [sku for sku in skus_list if sku in group]
+
+
+
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
         if sku in DISCOUNT_OFFERS_BY_ITEM:
@@ -103,4 +112,5 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
