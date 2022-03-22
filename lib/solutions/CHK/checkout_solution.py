@@ -21,14 +21,13 @@ def compute_price_with_special_offers(num_items, regular_price, *offers):
     # apply offers from best to worst
     for offer_quantity, offer_price in offers:
         num_offers = remaining_items // offer_quantity
-        remaining_items = num_items % offer_quantity
+        remaining_items = remaining_items % offer_quantity
         price += num_offers * offer_price
     price += remaining_items * regular_price
     return price
 
 
 def checkout(skus):
-    print(skus)
     skus_list = [sku for sku in skus]
 
     # basic input validation
@@ -55,15 +54,11 @@ def checkout(skus):
     total = 0
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
-        print(sku)
-        print(number_per_item[sku], regular_price)
         if sku in DISCOUNT_OFFERS_BY_ITEM:
-            print(DISCOUNT_OFFERS_BY_ITEM[sku])
             total += compute_price_with_special_offers(number_per_item[sku], regular_price, *DISCOUNT_OFFERS_BY_ITEM[sku])
         else:
-            print(regular_price * number_per_item[sku])
             total += regular_price * number_per_item[sku]
-        print(total)
 
     return total
+
 
