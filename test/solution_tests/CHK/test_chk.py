@@ -39,4 +39,16 @@ class TestChk:
         assert checkout("ABCDEFFFFF") == 50 + 30 + 20 + 15 + 40 + 40
         assert checkout("ABCDEFFFFFF") == 50 + 30 + 20 + 15 + 40 + 40
 
-        assert checkout("2K") == 120
+        assert checkout("KK") == 120
+
+        assert checkout("STX") == 45
+        assert checkout("STXSTX") == 90
+        assert checkout("STXXYZ") == 90
+        assert checkout("ASYZ") == 50 + 45
+        assert checkout("STXSX") == 45 + 20 + 17
+        assert checkout("STXYZ") == 45 + 20 + 17 # TYZ + S + X benefits the costumer
+        assert checkout("XYZ") == 45
+        assert checkout("ZZY") == 21 + 21 + 20
+        assert checkout("ZZSTXY") == 17 + 21 + 20 + 45# X + Z + S + ZTY
+
+

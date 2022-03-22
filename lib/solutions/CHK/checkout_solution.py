@@ -48,7 +48,7 @@ DISCOUNT_OFFERS_BY_ITEM = {
 GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B"), "N": (3, "M"), "R": (3, "Q")}
 # group offers
 GROUP_OFFERS = {
-
+    (("S", "T", "X", "Y", "Z"), 45)
 }
 
 
@@ -103,3 +103,4 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
