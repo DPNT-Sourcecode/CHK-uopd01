@@ -35,3 +35,11 @@ class TestChk:
         assert checkout_solution.checkout("AAAAAAAAA") == 380
         assert checkout_solution.checkout("AAAAAEEBAAABB") == 455
 
+        assert checkout_solution.checkout("ABCDEF") == 50 + 30 + 20 +15 + 40 + 10
+        assert checkout_solution.checkout("ABCDEFF") == 50 + 30 + 20 +15 + 40 + 20
+        assert checkout_solution.checkout("ABCDEFFF") == 50 + 30 + 20 +15 + 40 + 20
+        assert checkout_solution.checkout("ABCDEFFFF") == 50 + 30 + 20 +15 + 40 + 30
+        assert checkout_solution.checkout("ABCDEFFFFF") == 50 + 30 + 20 +15 + 40 + 40
+        assert checkout_solution.checkout("ABCDEFFFFFF") == 50 + 30 + 20 +15 + 40 + 40
+
+
