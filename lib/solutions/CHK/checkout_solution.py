@@ -108,11 +108,9 @@ def checkout(skus):
         num_remaining_items = len(skus_in_group) % necessary_quantity
         for i in range(num_remaining_items):
             cheapest_sku = sorted(skus_in_group, key=lambda x: PRICE_BY_ITEM[x])[0]
-            print(cheapest_sku)
             skus_in_group.remove(cheapest_sku)
         for sku in skus_in_group:
             number_per_item[sku] -= 1
-
 
     for sku in number_per_item:
         regular_price = PRICE_BY_ITEM[sku]
@@ -122,6 +120,7 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
 
 
