@@ -12,7 +12,7 @@ PRICE_BY_ITEM = {
     "H": 10,
     "I": 35,
     "J": 60,
-    "K": 80,
+    "K": 70,
     "L": 90,
     "M": 15,
     "N": 40,
@@ -20,14 +20,14 @@ PRICE_BY_ITEM = {
     "P": 50,
     "Q": 30,
     "R": 50,
-    "S": 30,
+    "S": 20,
     "T": 20,
     "U": 40,
     "V": 50,
     "W": 20,
-    "X": 90,
-    "Y": 10,
-    "Z": 50,
+    "X": 17,
+    "Y": 20,
+    "Z": 21,
 }
 # We'll map items to lists of length 2 tuples such that the first element
 # is the number of items, second element is the total discounted price
@@ -37,15 +37,19 @@ DISCOUNT_OFFERS_BY_ITEM = {
     "A": [(3, 130), (5, 200)],
     "B": [(2, 45)],
     "F": [(3, 20)],
-    "K": [(2, 150)],
+    "H": [(5, 45), (10, 80)],
+    "K": [(2, 120)],
     "P": [(5, 200)],
     "Q": [(3, 80)],
     "V": [(2, 90), (3, 130)],
-    "H": [(5, 45), (10, 80)],
     "U": [(4, 120)],
 }
 # for get one free offers, first element is number of items, second is the item you get for free
 GET_ONE_FREE_OFFERS_BY_ITEM = {"E": (2, "B"), "N": (3, "M"), "R": (3, "Q")}
+# group offers
+GROUP_OFFERS = {
+
+}
 
 
 def compute_price_with_special_offers(num_items, regular_price, *offers):
@@ -99,5 +103,3 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
-
-

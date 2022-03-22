@@ -40,6 +40,3 @@ class TestChk:
         assert checkout("ABCDEFFFFFF") == 50 + 30 + 20 + 15 + 40 + 40
 
         assert checkout("2K") == 120
-
-
-
