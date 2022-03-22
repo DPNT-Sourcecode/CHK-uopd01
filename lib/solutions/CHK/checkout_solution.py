@@ -99,9 +99,19 @@ def checkout(skus):
     total = 0
 
     # apply group offers
-    for group, necessary_quantity, price in GROUP_OFFERS:
+    for group, necessary_quantity, offer_price in GROUP_OFFERS:
         skus_in_group = [sku for sku in skus_list if sku in group]
-
+        number_of_offers = len(skus_in_group) // necessary_quantity
+        total += number_of_offers * offer_price
+        # if there are remaining items that couldn't form a group of 3
+        # we should leave them out of the offer in a way that favor the costumer
+        num_remaining_items = len(skus_in_group) % necessary_quantity
+        for i in range(num_remaining_items):
+            cheapest_sku = sorted(skus_in_group, key=lambda x: PRICE_BY_ITEM[x])[0]
+            print(cheapest_sku)
+            skus_in_group.remove(cheapest_sku)
+        for sku in skus_in_group:
+            number_per_item[sku] -= 1
 
 
     for sku in number_per_item:
@@ -112,5 +122,6 @@ def checkout(skus):
             total += regular_price * number_per_item[sku]
 
     return total
+
 
 
